@@ -1,0 +1,42 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="tr">
+
+@await Html.PartialAsync("/Views/UILayoutPartial/_HeadPartial.cshtml")
+
+<body>
+
+    <!-- ======= Header ======= -->
+    @await Html.PartialAsync("/Views/UILayoutPartial/_HeaderPartial.cshtml")
+    <!-- End Header -->
+    <!-- ======= Sidebar ======= -->
+    @await Html.PartialAsync("/Views/UILayoutPartial/_SidebarPartial.cshtml")
+    <!-- End Sidebar-->
+
+    <main id="main" class="main">
+        <div class="pagetitle">
+            <h1>Dashboard</h1>
+            <nav>
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li class="breadcrumb-item active">Dashboard</li>
+                </ol>
+            </nav>
+        </div>
+        @RenderBody()
+    </main>
+    <!-- End #main -->
+    <!-- ======= Footer ======= -->
+    @await Html.PartialAsync("/Views/UILayoutPartial/_FooterPartial.cshtml")
+    <!-- End Footer -->
+
+    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+    @await Html.PartialAsync("/Views/UILayoutPartial/_ScriptsPartial.cshtml")
+
+</body>
+
+</html>
