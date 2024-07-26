@@ -1,4 +1,4 @@
-﻿@model List<StockMovement>
+﻿@model List<StockMovementDTO>
 @{
     ViewData["Title"] = "StockMovement";
     Layout = "~/Views/Shared/_UILayout.cshtml";
@@ -28,8 +28,8 @@
     <table class="table table-bordered table-hover">
         <thead class="thead-dark">
             <tr>
-                <th>ProductId</th>
-                <th>WarehouseId</th>
+                <th>ProductName</th>
+                <th>WarehouseName</th>
                 <th>Quantity</th>
                 <th>MovementType</th>
                 <th>MovementDate</th>
@@ -41,11 +41,11 @@
             @foreach (var item in Model)
             {
                 <tr>
-                    <td>@item.ProductId</td>
-                    <td>@item.WarehouseId</td>
+                    <td>@item.ProductName</td>
+                    <td>@item.WarehouseName</td>
                     <td>@item.Quantity</td>
                     <td>@item.MovementType</td>
-                    <td>@item.MovementDate</td>
+                    <td>@item.MovementDate.ToString("dd MMM yyyy HH:mm")</td>
                     <td>
                         <a href="/StockMovement/UpdateStockMovement/item.Id" class="btn btn-success">
                             <i class="bi bi-pencil"></i>

@@ -20,6 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\StockManagement.DTO\StockManagement.DTO.csproj" />
     <ProjectReference Include="..\StockManagement.Entities\StockManagement.Entities.csproj" />
   </ItemGroup>
 

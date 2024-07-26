@@ -1,8 +1,10 @@
+using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using StockManagement.Business.Container;
 using StockManagement.DataAccess.Abstract;
 using StockManagement.DataAccess.DbContexts;
 using StockManagement.DataAccess.Repository;
+using StockManagement.Web.Mapping.AutoMapperProfile;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -22,6 +24,7 @@ builder.Services.ConfigureRepositoryRegistration();
 // Generic repository kaydý
 builder.Services.AddScoped(typeof(IGenericDal<>), typeof(GenericRepository<>));
 
+builder.Services.AddAutoMapper(typeof(Program));
 
 var app = builder.Build();
 
