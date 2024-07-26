@@ -17,6 +17,9 @@ namespace StockManagement.Entities.Concrete
         public int Barcode { get; set; }
         public int SupplierId { get; set; }
         public Supplier Supplier { get; set; } // Navigation Property
-        public ICollection<StockMovement> StockMovements { get; set; } // Navigation Property
+        public ICollection<StockMovement> StockMovements { get; set; } = new List<StockMovement>(); // Navigation Property
+        public int CategoryId { get; set; } // Yeni Özellik
+        public Category Category { get; set; } // Navigation Property
+
     }
 }

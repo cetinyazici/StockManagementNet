@@ -1,0 +1,66 @@
+﻿@model List<StockMovement>
+@{
+    ViewData["Title"] = "StockMovement";
+    Layout = "~/Views/Shared/_UILayout.cshtml";
+}
+
+<div class="pagetitle">
+    <h1>StockMovement</h1>
+    <nav>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
+            <li class="breadcrumb-item active">StockMovement</li>
+        </ol>
+    </nav>
+</div>
+<h1 class="text-center">
+    <i class="bi bi-arrows-move"></i>
+    StockMovement Page
+</h1>
+
+<div class="my-3">
+    <a href="/StockMovement/AddStockMovement" target="_blank" class="btn btn-primary">
+        <i class="bi bi-arrow-up"></i>
+        ADD NEW
+    </a>
+</div>
+<div class="table-responsive">
+    <table class="table table-bordered table-hover">
+        <thead class="thead-dark">
+            <tr>
+                <th>ProductId</th>
+                <th>WarehouseId</th>
+                <th>Quantity</th>
+                <th>MovementType</th>
+                <th>MovementDate</th>
+                <th>UPDATE</th>
+                <th>DELETE</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.ProductId</td>
+                    <td>@item.WarehouseId</td>
+                    <td>@item.Quantity</td>
+                    <td>@item.MovementType</td>
+                    <td>@item.MovementDate</td>
+                    <td>
+                        <a href="/StockMovement/UpdateStockMovement/item.Id" class="btn btn-success">
+                            <i class="bi bi-pencil"></i>
+                            UPDATE
+                        </a>
+                    </td>
+                    <td>
+                        <a href="/StockMovement/DeleteStockMovement/item.Id" class="btn btn-danger">
+                            <i class="bi bi-trash"></i>
+                            DELETE
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+

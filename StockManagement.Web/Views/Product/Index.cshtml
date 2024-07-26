@@ -1,0 +1,68 @@
+﻿@model List<Product>
+@{
+    ViewData["Title"] = "Product";
+    Layout = "~/Views/Shared/_UILayout.cshtml";
+}
+<div class="pagetitle">
+    <h1>Product</h1>
+    <nav>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
+            <li class="breadcrumb-item active">Product</li>
+        </ol>
+    </nav>
+</div>
+<h1 class="text-center">
+    <i class="bi bi-box-seam"></i>
+    Product Page
+</h1>
+
+<div class="my-3">
+    <a href="/Product/AddProduct" target="_blank" class="btn btn-primary">
+        <i class="bi bi-arrow-up"></i>
+        ADD NEW
+    </a>
+</div>
+<div class="table-responsive">
+    <table class="table table-bordered table-hover">
+        <thead class="thead-dark">
+            <tr>
+                <th>Name</th>
+                <th>Price</th>
+                <th>Barcode</th>
+                <th>StockQuantity</th>
+                <th>SupplierId</th>
+                <th>CategoryId</th>
+                <th>Description</th>
+                <th>UPDATE</th>
+                <th>DELETE</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Name</td>
+                    <td>@item.Price</td>
+                    <td>@item.Barcode</td>
+                    <td>@item.StockQuantity</td>
+                    <td>@item.SupplierId</td>
+                    <td>@item.CategoryId</td>
+                    <td>@(item.Description.Length > 50 ? item.Description.Substring(0, 25) + "..." : item.Description)</td>
+                    <td>
+                        <a href="/Product/UpdateProduct/item.Id" class="btn btn-success">
+                            <i class="bi bi-pencil"></i>
+                            UPDATE
+                        </a>
+                    </td>
+                    <td>
+                        <a href="/Product/UpdateProduct/item.Id" class="btn btn-danger">
+                            <i class="bi bi-trash"></i>
+                            DELETE
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

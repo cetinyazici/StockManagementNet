@@ -13,7 +13,7 @@ namespace StockManagement.DataAccess.Concretes
 {
     public class CategoryDal : GenericRepository<Category>, ICategoryDal
     {
-        public CategoryDal(DbSet<Category> dbSet, AppDbContext appDbContext) : base(dbSet, appDbContext)
+        public CategoryDal(AppDbContext appDbContext) : base(appDbContext)
         {
         }
     }

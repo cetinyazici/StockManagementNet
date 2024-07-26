@@ -13,7 +13,7 @@ namespace StockManagement.DataAccess.Concretes
 {
     public class UserDal : GenericRepository<User>, IUserDal
     {
-        public UserDal(DbSet<User> dbSet, AppDbContext appDbContext) : base(dbSet, appDbContext)
+        public UserDal(AppDbContext appDbContext) : base(appDbContext)
         {
         }
     }

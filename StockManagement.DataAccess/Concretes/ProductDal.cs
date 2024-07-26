@@ -13,7 +13,7 @@ namespace StockManagement.DataAccess.Concretes
 {
     public class ProductDal : GenericRepository<Product>, IProductDal
     {
-        public ProductDal(DbSet<Product> dbSet, AppDbContext appDbContext) : base(dbSet, appDbContext)
+        public ProductDal(AppDbContext appDbContext) : base(appDbContext)
         {
         }
     }

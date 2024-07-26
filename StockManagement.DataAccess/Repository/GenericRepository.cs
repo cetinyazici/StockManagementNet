@@ -1,11 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using StockManagement.DataAccess.Abstract;
 using StockManagement.DataAccess.DbContexts;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace StockManagement.DataAccess.Repository
 {
@@ -14,21 +11,21 @@ namespace StockManagement.DataAccess.Repository
         private readonly AppDbContext _appDbContext;
         private readonly DbSet<T> _dbSet;
 
-        public GenericRepository(DbSet<T> dbSet, AppDbContext appDbContext)
+        public GenericRepository(AppDbContext appDbContext)
         {
-            _dbSet = dbSet;
             _appDbContext = appDbContext;
+            _dbSet = _appDbContext.Set<T>();
         }
 
         public void Create(T entity)
         {
-            _appDbContext.Add<T>(entity);
+            _dbSet.Add(entity);
             _appDbContext.SaveChanges();
         }
 
         public void Delete(T entity)
         {
-            _appDbContext.Remove<T>(entity);
+            _dbSet.Remove(entity);
             _appDbContext.SaveChanges();
         }
 
@@ -44,7 +41,7 @@ namespace StockManagement.DataAccess.Repository
 
         public void Update(T entity)
         {
-            _appDbContext.Update<T>(entity);
+            _dbSet.Update(entity);
             _appDbContext.SaveChanges();
         }
     }

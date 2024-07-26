@@ -14,7 +14,7 @@ namespace StockManagement.Entities.Concrete
         public int WarehouseId { get; set; }
         public Warehouse Warehouse { get; set; } // Navigation Property
         public int Quantity { get; set; }
-        public DateTime MovementDate { get; set; }
+        public DateTime MovementDate { get; set; } = DateTime.Now;
         public string MovementType { get; set; } // E.g., "In" or "Out"
     }
 }

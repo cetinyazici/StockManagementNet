@@ -13,7 +13,7 @@ namespace StockManagement.DataAccess.Concretes
 {
     public class StockMovementDal : GenericRepository<StockMovement>, IStockMovementDal
     {
-        public StockMovementDal(DbSet<StockMovement> dbSet, AppDbContext appDbContext) : base(dbSet, appDbContext)
+        public StockMovementDal(AppDbContext appDbContext) : base(appDbContext)
         {
         }
     }

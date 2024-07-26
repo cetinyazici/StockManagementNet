@@ -13,7 +13,7 @@ namespace StockManagement.DataAccess.Concretes
 {
     public class SupplierDal : GenericRepository<Supplier>, ISupplierDal
     {
-        public SupplierDal(DbSet<Supplier> dbSet, AppDbContext appDbContext) : base(dbSet, appDbContext)
+        public SupplierDal(AppDbContext appDbContext) : base(appDbContext)
         {
         }
     }

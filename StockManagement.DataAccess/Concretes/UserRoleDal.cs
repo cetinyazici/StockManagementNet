@@ -13,7 +13,7 @@ namespace StockManagement.DataAccess.Concretes
 {
     public class UserRoleDal : GenericRepository<UserRole>, IUserRoleDal
     {
-        public UserRoleDal(DbSet<UserRole> dbSet, AppDbContext appDbContext) : base(dbSet, appDbContext)
+        public UserRoleDal(AppDbContext appDbContext) : base(appDbContext)
         {
         }
     }

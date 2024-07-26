@@ -13,7 +13,7 @@ namespace StockManagement.DataAccess.Concretes
 {
     public class WarehouseDal : GenericRepository<Warehouse>, IWarehouseDal
     {
-        public WarehouseDal(DbSet<Warehouse> dbSet, AppDbContext appDbContext) : base(dbSet, appDbContext)
+        public WarehouseDal(AppDbContext appDbContext) : base(appDbContext)
         {
         }
     }
