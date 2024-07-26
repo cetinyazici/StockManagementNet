@@ -8,7 +8,9 @@ namespace StockManagement.Web.Mapping.AutoMapperProfile
     {
         public MapProfile()
         {
-            CreateMap<StockMovementDTO, StockMovement>().ReverseMap();
+            CreateMap<StockMovement, StockMovementDTO>()
+                .ForMember(dest => dest.ProductName, opt => opt.MapFrom(src => src.Product.Name))
+                .ForMember(dest => dest.WarehouseName, opt => opt.MapFrom(src => src.Warehouse.Name));
         }
     }
 }

@@ -24,7 +24,7 @@ builder.Services.ConfigureRepositoryRegistration();
 // Generic repository kaydý
 builder.Services.AddScoped(typeof(IGenericDal<>), typeof(GenericRepository<>));
 
-builder.Services.AddAutoMapper(typeof(Program));
+builder.Services.AddAutoMapper(typeof(MapProfile));
 
 var app = builder.Build();
 

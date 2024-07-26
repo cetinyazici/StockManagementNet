@@ -9,5 +9,6 @@ namespace StockManagement.Business.Abstract
 {
     public interface IStockMovementService : IGenericService<StockMovement>
     {
+        List<StockMovement> GetAllWithDetails();
     }
 }

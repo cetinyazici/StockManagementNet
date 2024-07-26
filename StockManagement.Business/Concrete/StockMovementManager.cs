@@ -1,5 +1,7 @@
-﻿using StockManagement.Business.Abstract;
+﻿using Microsoft.EntityFrameworkCore;
+using StockManagement.Business.Abstract;
 using StockManagement.DataAccess.Abstract;
+using StockManagement.DataAccess.DbContexts;
 using StockManagement.Entities.Concrete;
 using System;
 using System.Collections.Generic;
@@ -12,20 +14,55 @@ namespace StockManagement.Business.Concrete
     public class StockMovementManager : IStockMovementService
     {
         private readonly IStockMovementDal _stockMovementDal;
+        private readonly IProductService _productService;
+        private readonly AppDbContext _context;
 
-        public StockMovementManager(IStockMovementDal stockMovementDal)
+        public StockMovementManager(IStockMovementDal stockMovementDal, AppDbContext context, IProductService productService)
         {
             _stockMovementDal = stockMovementDal;
+            _context = context;
+            _productService = productService;
         }
 
-        public void TCreate(StockMovement t)
+        public List<StockMovement> GetAllWithDetails()
         {
-            _stockMovementDal.Create(t);
+            return _context.Set<StockMovement>()
+                           .Include(sm => sm.Product)
+                           .Include(sm => sm.Warehouse)
+                           .ToList();
         }
 
-        public void TDelete(StockMovement t)
+        public void TCreate(StockMovement stockMovement)
         {
-            _stockMovementDal.Delete(t);
+            _stockMovementDal.Create(stockMovement);
+
+            var product = _productService.TGetById(stockMovement.ProductId);
+
+            if (stockMovement.MovementType == "In")
+            {
+                product.StockQuantity += stockMovement.Quantity;
+            }
+            else if (stockMovement.MovementType == "Out")
+            {
+                product.StockQuantity -= stockMovement.Quantity;
+            }
+            _productService.TUpdate(product);
+        }
+
+        public void TDelete(StockMovement stockMovement)
+        {
+            _stockMovementDal.Delete(stockMovement);
+
+            var product = _productService.TGetById(stockMovement.ProductId);
+            if (stockMovement.MovementType == "In")
+            {
+                product.StockQuantity -= stockMovement.Quantity;
+            }
+            else if (stockMovement.MovementType == "Out")
+            {
+                product.StockQuantity += stockMovement.Quantity;
+            }
+            _productService.TUpdate(product);
         }
 
         public List<StockMovement> TGetAll()
@@ -38,9 +75,35 @@ namespace StockManagement.Business.Concrete
             return _stockMovementDal.GetById(id);
         }
 
-        public void TUpdate(StockMovement t)
+        public void TUpdate(StockMovement stockMovement)
         {
-            _stockMovementDal.Update(t);
+            var existingStockMovement = _stockMovementDal.GetById(stockMovement.Id);
+            if (existingStockMovement != null)
+            {
+                var product = _productService.TGetById(existingStockMovement.ProductId);
+                if (existingStockMovement.MovementType == "In")
+                {
+                    product.StockQuantity -= existingStockMovement.Quantity;
+                }
+                else if (existingStockMovement.MovementType == "Out")
+                {
+                    product.StockQuantity += existingStockMovement.Quantity;
+                }
+                _productService.TUpdate(product);
+            }
+
+            _stockMovementDal.Update(stockMovement);
+
+            var updatedProduct = _productService.TGetById(stockMovement.ProductId);
+            if (stockMovement.MovementType == "In")
+            {
+                updatedProduct.StockQuantity += stockMovement.Quantity;
+            }
+            else if (stockMovement.MovementType == "Out")
+            {
+                updatedProduct.StockQuantity -= stockMovement.Quantity;
+            }
+            _productService.TUpdate(updatedProduct);
         }
     }
 }
