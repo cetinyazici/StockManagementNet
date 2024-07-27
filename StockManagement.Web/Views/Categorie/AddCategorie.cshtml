@@ -1,0 +1,32 @@
+﻿@model Category
+@{
+    ViewData["Title"] = "Add Category";
+    Layout = "~/Views/Shared/_UILayout.cshtml";
+}
+<div class="pagetitle">
+    <h1>Category</h1>
+    <nav>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
+            <li class="breadcrumb-item active">New Category</li>
+        </ol>
+    </nav>
+</div>
+<h1 class="text-center">
+    <i class="bi bi-tags"></i>
+    New Category
+</h1>
+
+<form id="categoryForm" asp-action="AddCategorie" method="post">
+    <div class="form-group">
+        @Html.LabelFor(model => model.CategoryName, "Category Name")
+        @Html.TextBoxFor(model => model.CategoryName, new { @class = "form-control", placeholder = "Enter category name" })
+        @Html.ValidationMessageFor(model => model.CategoryName, "", new { @class = "text-danger" })
+    </div>
+    <br />
+    <button type="submit" class="btn btn-outline-primary">
+        <i class="bi bi-check-circle"></i> Create
+    </button>
+</form>
+
+
