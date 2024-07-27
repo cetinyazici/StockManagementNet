@@ -15,18 +15,18 @@ namespace StockManagement.Business.Concrete
     {
         private readonly IStockMovementDal _stockMovementDal;
         private readonly IProductService _productService;
-        private readonly AppDbContext _context;
+        private readonly AppDbContext _appDbContext;
 
         public StockMovementManager(IStockMovementDal stockMovementDal, AppDbContext context, IProductService productService)
         {
             _stockMovementDal = stockMovementDal;
-            _context = context;
+            _appDbContext = context;
             _productService = productService;
         }
 
         public List<StockMovement> GetAllWithDetails()
         {
-            return _context.Set<StockMovement>()
+            return _appDbContext.Set<StockMovement>()
                            .Include(sm => sm.Product)
                            .Include(sm => sm.Warehouse)
                            .ToList();

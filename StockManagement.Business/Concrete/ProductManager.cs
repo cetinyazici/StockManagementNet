@@ -1,5 +1,9 @@
-﻿using StockManagement.Business.Abstract;
+﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
+using StockManagement.Business.Abstract;
 using StockManagement.DataAccess.Abstract;
+using StockManagement.DataAccess.DbContexts;
+using StockManagement.DTO.DTO;
 using StockManagement.Entities.Concrete;
 using System;
 using System.Collections.Generic;
@@ -12,10 +16,26 @@ namespace StockManagement.Business.Concrete
     public class ProductManager : IProductService
     {
         private readonly IProductDal _productDal;
+        private readonly AppDbContext _appDbContext;
+        private readonly IMapper _mapper;
 
-        public ProductManager(IProductDal productDal)
+        public ProductManager(IProductDal productDal, AppDbContext appDbContext, IMapper mapper)
         {
             _productDal = productDal;
+            _appDbContext = appDbContext;
+            _mapper = mapper;
+        }
+
+        public List<Product> GetAllWithDetails()
+        {
+            var products = _appDbContext.Products
+                            .Include(p => p.Category)
+                            .Include(p => p.Supplier)
+                            .Include(p => p.StockMovements)
+                                .ThenInclude(sm => sm.Warehouse)
+                            .ToList();
+
+            return products;
         }
 
         public void TCreate(Product t)

@@ -1,4 +1,5 @@
-﻿using StockManagement.Entities.Concrete;
+﻿using StockManagement.DTO.DTO;
+using StockManagement.Entities.Concrete;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,5 +10,6 @@ namespace StockManagement.Business.Abstract
 {
     public interface IProductService : IGenericService<Product>
     {
+        List<Product> GetAllWithDetails();
     }
 }

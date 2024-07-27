@@ -1,8 +1,9 @@
-﻿@model List<Product>
+﻿@model List<ProductDTO>
 @{
     ViewData["Title"] = "Product";
     Layout = "~/Views/Shared/_UILayout.cshtml";
 }
+
 <div class="pagetitle">
     <h1>Product</h1>
     <nav>
@@ -12,17 +13,19 @@
         </ol>
     </nav>
 </div>
-<h1 class="text-center">
+
+<h1 class="text-center mb-4">
     <i class="bi bi-box-seam"></i>
     Product Page
 </h1>
 
-<div class="my-3">
-    <a href="/Product/AddProduct" target="_blank" class="btn btn-primary">
+<div class="mb-3">
+    <a href="/Product/AddProduct" class="btn btn-primary">
         <i class="bi bi-arrow-up"></i>
         ADD NEW
     </a>
 </div>
+
 <div class="table-responsive">
     <table class="table table-bordered table-hover">
         <thead class="thead-dark">
@@ -31,8 +34,9 @@
                 <th>Price</th>
                 <th>Barcode</th>
                 <th>StockQuantity</th>
-                <th>SupplierId</th>
-                <th>CategoryId</th>
+                <th>SupplierName</th>
+                <th>CategoryName</th>
+                <th>Warehouses</th>
                 <th>Description</th>
                 <th>UPDATE</th>
                 <th>DELETE</th>
@@ -45,18 +49,36 @@
                     <td>@item.Name</td>
                     <td>@item.Price</td>
                     <td>@item.Barcode</td>
-                    <td>@item.StockQuantity</td>
-                    <td>@item.SupplierId</td>
-                    <td>@item.CategoryId</td>
-                    <td>@(item.Description.Length > 50 ? item.Description.Substring(0, 25) + "..." : item.Description)</td>
                     <td>
-                        <a href="/Product/UpdateProduct/item.Id" class="btn btn-success">
+                        <span class="badge bg-secondary fs-6">@item.StockQuantity</span>
+                    </td>
+                    <td>@item.SupplierName</td>
+                    <td>@item.CategoryName</td>
+                    <td>
+                        <ul class="list-unstyled">
+                            @foreach (var warehouseStock in item.WarehouseStocks)
+                            {
+                                <li class="d-flex justify-content-between align-items-center">
+                                    <span>@warehouseStock.WarehouseName</span>
+                                    <span class="badge bg-secondary fs-6">@warehouseStock.TotalQuantity</span>
+                                </li>
+                                <p>~~</p>
+                            }
+                        </ul>
+                    </td>
+
+
+
+
+                    <td>@(item.Description.Length > 50 ? item.Description.Substring(0, 50) + "..." : item.Description)</td>
+                    <td>
+                        <a href="/Product/UpdateProduct/@item.Id" class="btn btn-success btn-sm">
                             <i class="bi bi-pencil"></i>
                             UPDATE
                         </a>
                     </td>
                     <td>
-                        <a href="/Product/UpdateProduct/item.Id" class="btn btn-danger">
+                        <a href="/Product/DeleteProduct/@item.Id" class="btn btn-danger btn-sm">
                             <i class="bi bi-trash"></i>
                             DELETE
                         </a>
