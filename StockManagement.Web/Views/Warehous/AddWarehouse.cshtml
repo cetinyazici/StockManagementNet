@@ -1,0 +1,49 @@
+﻿@model Warehouse
+@{
+    ViewData["Title"] = "Add Warehouse";
+    Layout = "~/Views/Shared/_UILayout.cshtml";
+}
+
+<div class="pagetitle">
+    <h1>Warehouse</h1>
+    <nav>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
+            <li class="breadcrumb-item active">New Warehouse</li>
+        </ol>
+    </nav>
+</div>
+<h1 class="text-center">
+    <i class="bi bi-building"></i>
+    New Warehouse
+</h1>
+
+<form id="warehouseForm" asp-action="AddWarehouse" method="post">
+    <div class="form-group">
+        @Html.LabelFor(model => model.Name, "Warehouse Name")
+        @Html.TextBoxFor(model => model.Name, new { @class = "form-control", placeholder = "Enter Warehouse Name" })
+        @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+    </div>
+    <br />
+    <div class="form-group">
+        @Html.LabelFor(model => model.Location, "Warehouse Location")
+        @Html.TextBoxFor(model => model.Location, new { @class = "form-control", placeholder = "Enter Warehouse Location" })
+        @Html.ValidationMessageFor(model => model.Location, "", new { @class = "text-danger" })
+    </div>
+    <br />
+    <button type="submit" class="btn btn-outline-primary">
+        <i class="bi bi-check-circle"></i> Create
+    </button>
+</form>
+
+@if (!ViewData.ModelState.IsValid)
+{
+    <div class="alert alert-danger">
+        <ul>
+            @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+            {
+                <li>@error.ErrorMessage</li>
+            }
+        </ul>
+    </div>
+}
