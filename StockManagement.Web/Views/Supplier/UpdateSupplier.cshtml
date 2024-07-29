@@ -1,0 +1,40 @@
+﻿@model Supplier
+@{
+    ViewData["Title"] = "Update Supplier";
+    Layout = "~/Views/Shared/_UILayout.cshtml";
+}
+
+<div class="pagetitle">
+    <h1>Supplier</h1>
+    <nav>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
+            <li class="breadcrumb-item active">Update Supplier</li>
+        </ol>
+    </nav>
+</div>
+
+<h1 class="text-center">
+    <i class="bi bi-people"></i>
+    Update Supplier
+</h1>
+
+<form id="supplierForm2" asp-action="UpdateSupplier" method="post">
+    @Html.HiddenFor(model => model.Id)
+    <div class="form-group">
+        @Html.LabelFor(model => model.Name, "Supplier Name")
+        @Html.TextBoxFor(model => model.Name, new { @class = "form-control", placeholder = "Enter Supplier name" })
+        @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+    </div>
+    <br />
+    <div class="form-group">
+        @Html.LabelFor(model => model.ContactInfo, "Supplier Location")
+        @Html.TextBoxFor(model => model.ContactInfo, new { @class = "form-control", type = "email", placeholder = "Enter Supplier ContactInfo" })
+        @Html.ValidationMessageFor(model => model.ContactInfo, "", new { @class = "text-danger" })
+    </div>
+    <br />
+    <button type="submit" class="btn btn-outline-primary">
+        <i class="bi bi-check-circle"></i> Update
+    </button>
+</form>
+
