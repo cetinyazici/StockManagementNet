@@ -1,6 +1,6 @@
 ﻿@model List<ProductDTO>
 @{
-    ViewData["Title"] = "Product";
+    ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_UILayout.cshtml";
 }
 
@@ -14,73 +14,79 @@
     </nav>
 </div>
 
-<h1 class="text-center mb-4">
+<h1 class="text-center">
     <i class="bi bi-box-seam"></i>
     Product Page
 </h1>
 
-<div class="mb-3">
+<div class="my-3">
     <a href="/Product/AddProduct" class="btn btn-primary">
         <i class="bi bi-arrow-up"></i>
-        ADD NEW
+        New Product
     </a>
 </div>
 
-<div class="table-responsive">
-    <table class="table table-bordered table-hover">
-        <thead class="thead-dark">
-            <tr>
-                <th>Name</th>
-                <th>Price</th>
-                <th>Barcode</th>
-                <th>StockQuantity</th>
-                <th>SupplierName</th>
-                <th>CategoryName</th>
-                <th>Warehouses</th>
-                <th>Description</th>
-                <th>UPDATE</th>
-                <th>DELETE</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model)
-            {
-                <tr>
-                    <td>@item.Name</td>
-                    <td>@item.Price</td>
-                    <td>@item.Barcode</td>
-                    <td>
-                        <span class="badge bg-secondary fs-6">@item.StockQuantity</span>
-                    </td>
-                    <td>@item.SupplierName</td>
-                    <td>@item.CategoryName</td>
-                    <td>
-                        <ul class="list-unstyled">
-                            @foreach (var warehouseStock in item.WarehouseStocks)
-                            {
-                                <li class="d-flex justify-content-between align-items-center">
-                                    <span>@warehouseStock.WarehouseName</span>
-                                    <span class="badge bg-secondary fs-6">@warehouseStock.TotalQuantity</span>
-                                </li>
-                                <p>~~</p>
-                            }
-                        </ul>
-                    </td>
-                    <td>@(item.Description.Length > 50 ? item.Description.Substring(0, 50) + "..." : item.Description)</td>
-                    <td>
-                        <a href="/Product/UpdateProduct/@item.Id" class="btn btn-success btn-sm">
-                            <i class="bi bi-pencil"></i>
-                            UPDATE
-                        </a>
-                    </td>
-                    <td>
-                        <a href="/Product/DeleteProduct/@item.Id" class="btn btn-danger btn-sm">
-                            <i class="bi bi-trash"></i>
-                            DELETE
-                        </a>
-                    </td>
-                </tr>
-            }
-        </tbody>
-    </table>
+<div class="row mt-5">
+    <div class="col">
+        <div class="table-responsive">
+            <table id="myTable" class="table table-striped table-bordered">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>#</th>
+                        <th>Name</th>
+                        <th>Price</th>
+                        <th>Barcode</th>
+                        <th>StockQuantity</th>
+                        <th>SupplierName</th>
+                        <th>CategoryName</th>
+                        <th>Warehouses</th>
+                        <th>Description</th>
+                        <th>UPDATE</th>
+                        <th>DELETE</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.Id</td>
+                            <td>@item.Name</td>
+                            <td>@item.Price</td>
+                            <td>@item.Barcode</td>
+                            <td>
+                                <span class="badge bg-secondary fs-6">@item.StockQuantity</span>
+                            </td>
+                            <td>@item.SupplierName</td>
+                            <td>@item.CategoryName</td>
+                            <td>
+                                <ul class="list-unstyled">
+                                    @foreach (var warehouseStock in item.WarehouseStocks)
+                                    {
+                                        <li class="d-flex justify-content-between align-items-center">
+                                            <span>@warehouseStock.WarehouseName</span>
+                                            <span class="badge bg-secondary fs-6">@warehouseStock.TotalQuantity</span>
+                                        </li>
+                                        <p>~~</p>
+                                    }
+                                </ul>
+                            </td>
+                            <td>@(item.Description.Length > 50 ? item.Description.Substring(0, 50) + "..." : item.Description)</td>
+                            <td>
+                                <a href="/Product/UpdateProduct/@item.Id" class="btn btn-success">
+                                    <i class="bi bi-pencil"></i>
+                                    UPDATE
+                                </a>
+                            </td>
+                            <td>
+                                <a href="/Product/DeleteProduct/@item.Id" class="btn btn-danger">
+                                    <i class="bi bi-trash"></i>
+                                    DELETE
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
 </div>

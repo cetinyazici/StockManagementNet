@@ -22,6 +22,22 @@ namespace StockManagement.Web.Mapping.AutoMapperProfile
                         WarehouseName = g.Key.Name,
                         TotalQuantity = g.Sum(sm => sm.Quantity)
                     }).ToList())); ;
+
+            CreateMap<ProductAddDTO, Product>()
+                .ForMember(dest => dest.SupplierId, opt => opt.MapFrom(src => src.SelectedSupplierId))
+                .ForMember(dest => dest.CategoryId, opt => opt.MapFrom(src => src.SelectedCategoryId))
+                .ForMember(dest => dest.StockMovements, opt => opt.Ignore()) // StockMovements'ı ilk mapleme sırasında atla
+                .AfterMap((dto, product) =>
+                {
+                    product.StockMovements = dto.SelectedWarehouseIds.Select(id => new StockMovement
+                    {
+                        WarehouseId = id,
+                        Quantity = dto.StockQuantity,
+                        MovementType = "In", // veya ilgili hareket türü
+                        MovementDate = DateTime.Now,
+                        Product = product
+                    }).ToList();
+                });
         }
     }
 }
