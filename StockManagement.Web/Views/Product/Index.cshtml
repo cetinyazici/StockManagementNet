@@ -1,6 +1,6 @@
 ﻿@model List<ProductDTO>
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Product List";
     Layout = "~/Views/Shared/_UILayout.cshtml";
 }
 
@@ -72,13 +72,13 @@
                             </td>
                             <td>@(item.Description.Length > 50 ? item.Description.Substring(0, 50) + "..." : item.Description)</td>
                             <td>
-                                <a href="/Product/UpdateProduct/@item.Id" class="btn btn-success">
+                                <a asp-controller="Product" asp-action="UpdateProduct" asp-route-id="@item.Id" class="btn btn-success">
                                     <i class="bi bi-pencil"></i>
                                     UPDATE
                                 </a>
                             </td>
                             <td>
-                                <a href="/Product/DeleteProduct/@item.Id" class="btn btn-danger">
+                                <a asp-controller="Product" asp-action="DeleteProduct" asp-route-id="@item.Id" class="btn btn-danger btn-delete-product">
                                     <i class="bi bi-trash"></i>
                                     DELETE
                                 </a>

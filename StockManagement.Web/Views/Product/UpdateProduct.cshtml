@@ -1,0 +1,98 @@
+﻿@model ProductUpdateViewModel
+@{
+    ViewData["Title"] = "Update Product";
+    Layout = "~/Views/Shared/_UILayout.cshtml";
+}
+
+<div class="pagetitle">
+    <h1>Product</h1>
+    <nav>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
+            <li class="breadcrumb-item active">Update Product</li>
+        </ol>
+    </nav>
+</div>
+
+<h1 class="text-center">
+    <i class="bi bi-box-seam"></i>
+    Update Product
+</h1>
+
+<form id="productForm2" asp-action="UpdateProduct" method="post">
+    @Html.AntiForgeryToken()
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Product.Name)
+        @Html.EditorFor(model => model.Product.Name, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.Product.Name, "", new { @class = "text-danger" })
+    </div>
+    <br />
+    <div class="form-group">
+        @Html.LabelFor(model => model.Product.Description)
+        @Html.TextAreaFor(model => model.Product.Description, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.Product.Description, "", new { @class = "text-danger" })
+    </div>
+    <br />
+    <div class="form-group">
+        @Html.LabelFor(model => model.Product.Price)
+        @Html.EditorFor(model => model.Product.Price, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.Product.Price, "", new { @class = "text-danger" })
+    </div>
+    <br />
+    <div class="form-group">
+        @Html.LabelFor(model => model.Product.StockQuantity)
+        @Html.EditorFor(model => model.Product.StockQuantity, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.Product.StockQuantity, "", new { @class = "text-danger" })
+    </div>
+    <br />
+    <div class="form-group">
+        @Html.LabelFor(model => model.Product.Barcode)
+        @Html.EditorFor(model => model.Product.Barcode, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.Product.Barcode, "", new { @class = "text-danger" })
+    </div>
+    <br />
+    <div class="form-group">
+        @Html.LabelFor(model => model.Product.SelectedSupplierId, "Supplier")
+        @Html.DropDownListFor(
+            model => model.Product.SelectedSupplierId,
+            new SelectList(Model.Suppliers, "Id", "Name"),
+            "Select Supplier",
+            new { @class = "form-control" }
+        )
+        @Html.ValidationMessageFor(model => model.Product.SelectedSupplierId, "", new { @class = "text-danger" })
+    </div>
+    <br />
+    <div class="form-group">
+        @Html.LabelFor(model => model.Product.SelectedCategoryId, "Category")
+        @Html.DropDownListFor(
+            model => model.Product.SelectedCategoryId,
+            new SelectList(Model.Categories, "Id", "CategoryName"),
+            "Select Category",
+            new { @class = "form-control" }
+        )
+        @Html.ValidationMessageFor(model => model.Product.SelectedCategoryId, "", new { @class = "text-danger" })
+    </div>
+    <br />
+    <div class="form-group">
+        @Html.LabelFor(model => model.Product.SelectedWarehouseIds, "Warehouse")
+        @Html.ListBoxFor(
+            model => model.Product.SelectedWarehouseIds,
+            new MultiSelectList(Model.Warehouses, "Id", "Name", Model.Product.SelectedWarehouseIds),
+            new { @class = "form-control" }
+        )
+        @Html.ValidationMessageFor(model => model.Product.SelectedWarehouseIds, "", new { @class = "text-danger" })
+    </div>
+    <br />
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary">
+            <i class="bi bi-check-circle"></i> Update
+        </button>
+    </div>
+</form>
+
+
+
+
+
+
