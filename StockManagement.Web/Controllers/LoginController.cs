@@ -79,11 +79,11 @@ namespace StockManagement.Web.Controllers
                 var result = await _signInManager.PasswordSignInAsync(model.UserName, model.Password, isPersistent: false, lockoutOnFailure: true);
                 if (result.Succeeded)
                 {
-                    return RedirectToAction("Index", "Home"); // Giriş başarılıysa ana sayfaya yönlendir
+                    return RedirectToAction("Index", "Product"); 
                 }
                 else if (result.IsLockedOut)
                 {
-                    return View("Lockout"); // Hesap kilitlenmişse, kilitlenme sayfasına yönlendir
+                    return View("Lockout"); 
                 }
                 else
                 {
