@@ -18,27 +18,27 @@ namespace StockManagement.Business.Concrete
             _userRoleDal = userRoleDal;
         }
 
-        public void TCreate(UserRole t)
+        public void TCreate(AppRole t)
         {
             _userRoleDal.Create(t);
         }
 
-        public void TDelete(UserRole t)
+        public void TDelete(AppRole t)
         {
             _userRoleDal.Delete(t);
         }
 
-        public List<UserRole> TGetAll()
+        public List<AppRole> TGetAll()
         {
             return _userRoleDal.GetAll();
         }
 
-        public UserRole TGetById(int id)
+        public AppRole TGetById(int id)
         {
             return _userRoleDal.GetById(id);
         }
 
-        public void TUpdate(UserRole t)
+        public void TUpdate(AppRole t)
         {
             _userRoleDal.Update(t);
         }

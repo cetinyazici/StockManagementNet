@@ -18,27 +18,27 @@ namespace StockManagement.Business.Concrete
             _userDal = userDal;
         }
 
-        public void TCreate(User t)
+        public void TCreate(AppUser t)
         {
             _userDal.Create(t);
         }
 
-        public void TDelete(User t)
+        public void TDelete(AppUser t)
         {
             _userDal.Delete(t);
         }
 
-        public List<User> TGetAll()
+        public List<AppUser> TGetAll()
         {
             return _userDal.GetAll();
         }
 
-        public User TGetById(int id)
+        public AppUser TGetById(int id)
         {
             return _userDal.GetById(id);
         }
 
-        public void TUpdate(User t)
+        public void TUpdate(AppUser t)
         {
             _userDal.Update(t);
         }

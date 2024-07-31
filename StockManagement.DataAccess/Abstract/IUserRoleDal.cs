@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace StockManagement.DataAccess.Abstract
 {
-    public interface IUserRoleDal : IGenericDal<UserRole>
+    public interface IUserRoleDal : IGenericDal<AppRole>
     {
     }
 }

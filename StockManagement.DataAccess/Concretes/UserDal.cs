@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace StockManagement.DataAccess.Concretes
 {
-    public class UserDal : GenericRepository<User>, IUserDal
+    public class UserDal : GenericRepository<AppUser>, IUserDal
     {
         public UserDal(AppDbContext appDbContext) : base(appDbContext)
         {

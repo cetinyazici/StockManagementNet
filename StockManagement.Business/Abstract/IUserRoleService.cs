@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace StockManagement.Business.Abstract
 {
-    public interface IUserRoleService : IGenericService<UserRole>
+    public interface IUserRoleService : IGenericService<AppRole>
     {
     }
 }
