@@ -10,12 +10,14 @@ namespace StockManagement.Web.Controllers
     public class SupplierController : Controller
     {
         private readonly ISupplierService _supplierService;
+        private readonly IAuditService _auditService;
 
         public bool ModalState { get; private set; }
 
-        public SupplierController(ISupplierService supplierService)
+        public SupplierController(ISupplierService supplierService, IAuditService auditService)
         {
             _supplierService = supplierService;
+            _auditService = auditService;
         }
 
         public IActionResult Index()
@@ -36,6 +38,7 @@ namespace StockManagement.Web.Controllers
             if (ModelState.IsValid)
             {
                 _supplierService.TCreate(supplier);
+                _auditService.CreateAuditLog(User.Identity.Name, "Create", $"Create Supplier: {supplier.Name}, ID: {supplier.Id}");
                 return RedirectToAction("Index");
             }
             else
@@ -61,6 +64,7 @@ namespace StockManagement.Web.Controllers
             if (ModelState.IsValid)
             {
                 _supplierService.TUpdate(supplier);
+                _auditService.CreateAuditLog(User.Identity.Name, "Update", $"Updated Supplier: {supplier.Name}, ID: {supplier.Id}");
                 return RedirectToAction("Index");
             }
             else
@@ -75,6 +79,7 @@ namespace StockManagement.Web.Controllers
             if (value is not null)
             {
                 _supplierService.TDelete(value);
+                _auditService.CreateAuditLog(User.Identity.Name, "Delete", $"Deleted Supplier: {value.Name}, ID: {value.Id}")
                 return RedirectToAction("Index");
             }
             return View();

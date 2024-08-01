@@ -9,10 +9,11 @@ namespace StockManagement.Web.Controllers
     public class WarehousController : Controller
     {
         private readonly IWarehouseService _warehouseService;
-
-        public WarehousController(IWarehouseService warehouseService)
+        private readonly IAuditService _auditService;
+        public WarehousController(IWarehouseService warehouseService, IAuditService auditService)
         {
             _warehouseService = warehouseService;
+            _auditService = auditService;
         }
 
         public IActionResult Index()
@@ -34,6 +35,7 @@ namespace StockManagement.Web.Controllers
             if (ModelState.IsValid)
             {
                 _warehouseService.TCreate(warehouse);
+                _auditService.CreateAuditLog(User.Identity.Name, "Create", $"Create Warehouse: {warehouse.Name}, ID: {warehouse.Id}");
                 return RedirectToAction("Index");
             }
             else
@@ -60,6 +62,7 @@ namespace StockManagement.Web.Controllers
             if (ModelState.IsValid)
             {
                 _warehouseService.TUpdate(warehouse);
+                _auditService.CreateAuditLog(User.Identity.Name, "Update", $"Update Warehouse: {warehouse.Name}, ID: {warehouse.Id}");
                 return RedirectToAction("Index");
             }
             else
@@ -74,6 +77,7 @@ namespace StockManagement.Web.Controllers
             if (value is not null)
             {
                 _warehouseService.TDelete(value);
+                _auditService.CreateAuditLog(User.Identity.Name, "Delete", $"Deleted Warehouse: {value.Name}, ID: {value.Id}");
                 return RedirectToAction("Index");
             }
             return View(value);

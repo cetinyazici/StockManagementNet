@@ -18,7 +18,7 @@ namespace StockManagement.Web.Controllers
         private readonly ICategoryService _categoryService;
         private readonly IWarehouseService _warehouseService;
         private readonly IStockMovementService _stockMovementService;
-        private readonly AppDbContext _appDbContext;
+        private readonly IAuditService _auditService;
         private readonly IMapper _mapper;
 
         public ProductController(
@@ -28,7 +28,7 @@ namespace StockManagement.Web.Controllers
             ICategoryService categoryService,
             IWarehouseService warehouseService,
             IStockMovementService stockMovementService,
-            AppDbContext appDbContext)
+            IAuditService auditService)
         {
             _productService = productService;
             _mapper = mapper;
@@ -36,7 +36,7 @@ namespace StockManagement.Web.Controllers
             _categoryService = categoryService;
             _warehouseService = warehouseService;
             _stockMovementService = stockMovementService;
-            _appDbContext = appDbContext;
+            _auditService = auditService;
         }
 
         public IActionResult Index()
@@ -88,6 +88,8 @@ namespace StockManagement.Web.Controllers
             var product = _mapper.Map<Product>(viewModel.Product);
             _productService.TCreate(product);
             AddStockMovements(viewModel.WarehouseIds, viewModel.Product.StockQuantity, product.Id);
+
+            _auditService.CreateAuditLog(User.Identity.Name, "Create", $"Product Created: {product.Name}, ID: {product.Id}, Barcode: {product.Barcode}");
 
             return RedirectToAction("Index");
         }
@@ -144,6 +146,8 @@ namespace StockManagement.Web.Controllers
             }).ToList();
 
             _productService.TUpdate(product);
+
+            _auditService.CreateAuditLog(User.Identity.Name, "Update", $"Product Updated: {product.Name}, ID: {product.Id}, Barcode: {product.Barcode}");
             return RedirectToAction("Index");
         }
 
@@ -153,6 +157,7 @@ namespace StockManagement.Web.Controllers
             if (values is not null)
             {
                 _productService.TDelete(values);
+                _auditService.CreateAuditLog(User.Identity.Name, "Delete", $"Product Deleted: {values.Name}, ID: {values.Id}, Barcode: {values.Barcode}");
                 return RedirectToAction("Index");
             }
             return View(values);

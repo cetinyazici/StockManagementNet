@@ -10,10 +10,14 @@ namespace StockManagement.Web.Controllers
     public class CategorieController : Controller
     {
         private readonly ICategoryService _categoryService;
+        private readonly IAuditService _auditService;
 
-        public CategorieController(ICategoryService categoryService)
+        public CategorieController(
+                        ICategoryService categoryService,
+                        IAuditService auditService)
         {
             _categoryService = categoryService;
+            _auditService = auditService;
         }
 
         public IActionResult Index()
@@ -35,6 +39,7 @@ namespace StockManagement.Web.Controllers
             if (ModelState.IsValid)
             {
                 _categoryService.TCreate(category);
+                _auditService.CreateAuditLog(User.Identity.Name, "Create", $"Categorie Created: {category.CategoryName}, ID: {category.Id}");
                 return RedirectToAction("Index");
             }
             else
@@ -61,6 +66,7 @@ namespace StockManagement.Web.Controllers
             if (ModelState.IsValid)
             {
                 _categoryService.TUpdate(category);
+                _auditService.CreateAuditLog(User.Identity.Name, "Update", $"Categorie Updated: {category.CategoryName}, ID: {category.Id}");
                 return RedirectToAction("Index");
             }
             return View(category);
@@ -69,9 +75,11 @@ namespace StockManagement.Web.Controllers
         public IActionResult DeleteCategorie(int id)
         {
             var values = _categoryService.TGetById(id);
-            if(values is not null)
+            if (values is not null)
             {
                 _categoryService.TDelete(values);
+                _auditService.CreateAuditLog(User.Identity.Name, "Delete", $"Categorie Deleted: {values.CategoryName}, ID: {values.Id}");
+
                 return RedirectToAction("Index");
             }
             return View(values);

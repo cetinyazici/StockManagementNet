@@ -45,6 +45,10 @@ namespace StockManagement.DataAccess.DbContexts
             modelBuilder.Entity<AppRole>(entity => {
                 entity.ToTable(name: "UserRoles");
             });
+
+            modelBuilder.Entity<Audit>(entity => {
+                entity.ToTable(name: "Audits");
+            });
         }
         public DbSet<Product> Products { get; set; }
         public DbSet<Category> Categories { get; set; }
@@ -53,5 +57,6 @@ namespace StockManagement.DataAccess.DbContexts
         public DbSet<AppUser> Users { get; set; }
         public DbSet<AppRole> UserRoles { get; set; }
         public DbSet<Warehouse> Warehouses { get; set; }
+        public DbSet<Audit> Audits { get; set; }
     }
 }

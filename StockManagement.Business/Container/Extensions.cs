@@ -23,6 +23,7 @@ namespace StockManagement.Business.Container
             services.AddScoped<IUserService, UserManager>();
             services.AddScoped<IUserRoleService, UserRoleManager>();
             services.AddScoped<IWarehouseService, WarehouseManager>();
+            services.AddScoped<IAuditService, AuditService>();
         }
         public static void ConfigureRepositoryRegistration(this IServiceCollection services)
         {
@@ -33,6 +34,7 @@ namespace StockManagement.Business.Container
             services.AddScoped<IUserDal, UserDal>();
             services.AddScoped<IUserRoleDal, UserRoleDal>();
             services.AddScoped<IWarehouseDal, WarehouseDal>();
+            services.AddScoped<IAuditDal, AuditDal>();
         }
     }
 }
