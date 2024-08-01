@@ -1,9 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using StockManagement.Business.Abstract;
 using StockManagement.Entities.Concrete;
 
 namespace StockManagement.Web.Controllers
 {
+    [Authorize]
     public class WarehousController : Controller
     {
         private readonly IWarehouseService _warehouseService;

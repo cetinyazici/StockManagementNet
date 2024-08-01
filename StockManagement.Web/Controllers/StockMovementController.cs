@@ -1,10 +1,12 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using StockManagement.Business.Abstract;
 using StockManagement.DTO.DTO;
 
 namespace StockManagement.Web.Controllers
 {
+    [Authorize]
     public class StockMovementController : Controller
     {
         private readonly IStockMovementService _stockMovementService;

@@ -1,10 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using StockManagement.Business.Abstract;
 using StockManagement.Entities.Concrete;
 
 namespace StockManagement.Web.Controllers
 {
+    [Authorize]
     public class CategorieController : Controller
     {
         private readonly ICategoryService _categoryService;

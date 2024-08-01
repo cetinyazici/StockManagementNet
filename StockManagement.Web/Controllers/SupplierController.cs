@@ -1,10 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using StockManagement.Business.Abstract;
 using StockManagement.Entities.Concrete;
 using System.Timers;
 
 namespace StockManagement.Web.Controllers
 {
+    [Authorize]
     public class SupplierController : Controller
     {
         private readonly ISupplierService _supplierService;

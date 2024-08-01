@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using StockManagement.Business.Abstract;
 using StockManagement.DataAccess.Concretes;
@@ -9,6 +10,7 @@ using StockManagement.Web.Models;
 
 namespace StockManagement.Web.Controllers
 {
+    [Authorize]
     public class ProductController : Controller
     {
         private readonly IProductService _productService;

@@ -1,10 +1,12 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using StockManagement.Entities.Concrete;
 using StockManagement.Web.Models;
 
 namespace StockManagement.Web.Controllers
 {
+    [AllowAnonymous]
     public class LoginController : Controller
     {
         private readonly UserManager<AppUser> _userManager;
