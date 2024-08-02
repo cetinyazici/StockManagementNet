@@ -19,6 +19,7 @@ namespace StockManagement.Web.Controllers
         private readonly IWarehouseService _warehouseService;
         private readonly IStockMovementService _stockMovementService;
         private readonly IAuditService _auditService;
+        private readonly ILogger _logger;
         private readonly IMapper _mapper;
 
         public ProductController(
@@ -28,7 +29,8 @@ namespace StockManagement.Web.Controllers
             ICategoryService categoryService,
             IWarehouseService warehouseService,
             IStockMovementService stockMovementService,
-            IAuditService auditService)
+            IAuditService auditService,
+            ILogger<ProductController> logger)
         {
             _productService = productService;
             _mapper = mapper;
@@ -37,6 +39,7 @@ namespace StockManagement.Web.Controllers
             _warehouseService = warehouseService;
             _stockMovementService = stockMovementService;
             _auditService = auditService;
+            _logger = logger;
         }
 
         public IActionResult Index()

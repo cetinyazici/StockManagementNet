@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.EntityFrameworkCore;
+using Serilog;
 using StockManagement.Business.Container;
 using StockManagement.DataAccess.Abstract;
 using StockManagement.DataAccess.DbContexts;
@@ -13,6 +14,16 @@ using StockManagement.Web.Mapping.AutoMapperProfile;
 using System.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
+
+// Serilog konfigürasyonu
+IConfiguration configuration = builder.Configuration; 
+Log.Logger = new LoggerConfiguration()
+    .ReadFrom.Configuration(configuration)
+    .CreateLogger();
+
+Log.Information("Uygulama baþlatýlýyor...");
+
+builder.Host.UseSerilog();
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();

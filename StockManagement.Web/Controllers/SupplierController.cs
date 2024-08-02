@@ -12,8 +12,6 @@ namespace StockManagement.Web.Controllers
         private readonly ISupplierService _supplierService;
         private readonly IAuditService _auditService;
 
-        public bool ModalState { get; private set; }
-
         public SupplierController(ISupplierService supplierService, IAuditService auditService)
         {
             _supplierService = supplierService;
@@ -79,7 +77,7 @@ namespace StockManagement.Web.Controllers
             if (value is not null)
             {
                 _supplierService.TDelete(value);
-                _auditService.CreateAuditLog(User.Identity.Name, "Delete", $"Deleted Supplier: {value.Name}, ID: {value.Id}")
+                _auditService.CreateAuditLog(User.Identity.Name, "Delete", $"Deleted Supplier: {value.Name}, ID: {value.Id}");
                 return RedirectToAction("Index");
             }
             return View();
