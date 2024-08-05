@@ -11,5 +11,6 @@ namespace StockManagement.Business.Abstract
     public interface IProductService : IGenericService<Product>
     {
         List<Product> GetAllWithDetails();
+        Task<List<string>> GetLowStockProductNamesAsync(int threshold);
     }
 }

@@ -1,0 +1,39 @@
+﻿@model List<StockMovement>
+<div class="col-12">
+    <div class="card recent-sales overflow-auto">
+
+        <table id="myTable" class="table table-hover table-bordered">
+            <thead class="thead-dark">
+                <tr>
+                    <th>#</th>
+                    <th>ProductName</th>
+                    <th>WarehouseName</th>
+                    <th>Quantity</th>
+                    <th>MovementDate</th>
+                    <th>MovementType</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <th>@item.Id</th>
+                        <td>@item.Product.Name</td>
+                        <td>@item.Warehouse.Name</td>
+                        <td>@item.Quantity</td>
+                        <td>@item.MovementDate.ToString("dd MMM yyyy HH:mm")</td>
+                        @if(item.MovementType=="Out")
+                        {
+                            <td class="badge bg-danger text-light">@item.MovementType</td>
+                        }
+                        else
+                        {
+                            <td class="badge bg-success text-light">@item.MovementType</td>
+                        }
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+    </div>
+</div>

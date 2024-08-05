@@ -38,6 +38,14 @@ namespace StockManagement.Business.Concrete
             return products;
         }
 
+        public async Task<List<string>> GetLowStockProductNamesAsync(int threshold)
+        {
+            return await _appDbContext.Products
+                .Where(p => p.StockQuantity <= threshold)
+                .Select(p => p.Name)
+                .ToListAsync();
+        }
+
         public void TCreate(Product t)
         {
             _productDal.Create(t);
