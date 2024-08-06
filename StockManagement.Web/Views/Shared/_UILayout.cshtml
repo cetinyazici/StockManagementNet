@@ -1,5 +1,8 @@
-﻿@{
-    Layout = null;
+﻿@inject UserManager<AppUser> UserManager
+@{
+    var user = await UserManager.GetUserAsync(User);
+    ViewData["UserName"] = user?.UserName;
+    ViewData["Email"] = user?.Email;
 }
 
 <!DOCTYPE html>

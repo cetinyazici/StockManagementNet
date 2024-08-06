@@ -81,7 +81,7 @@ namespace StockManagement.Web.Controllers
                 var result = await _signInManager.PasswordSignInAsync(model.UserName, model.Password, isPersistent: false, lockoutOnFailure: true);
                 if (result.Succeeded)
                 {
-                    return RedirectToAction("Index", "Product"); 
+                    return RedirectToAction("Index", "Dashboard"); 
                 }
                 else if (result.IsLockedOut)
                 {

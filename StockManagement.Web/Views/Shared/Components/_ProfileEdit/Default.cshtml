@@ -1,0 +1,22 @@
+﻿@model UserInformationDTO
+<div class="tab-pane profile-edit pt-3" id="profile-edit">
+    <form method="post" asp-action="EditProfile" asp-controller="User">
+        <input type="hidden" asp-for="Id" />
+        <div class="row mb-3">
+            <label for="name" class="col-md-4 col-lg-3 col-form-label">UserName</label>
+            <div class="col-md-8 col-lg-9">
+                <input type="text" class="form-control" asp-for="Name" value="@Model.Name">
+            </div>
+        </div>
+        <div class="row mb-3">
+            <label for="email" class="col-md-4 col-lg-3 col-form-label">Email</label>
+            <div class="col-md-8 col-lg-9">
+                <input type="email" class="form-control" asp-for="Email" value="@Model.Email">
+            </div>
+        </div>
+        <div class="text-center">
+            <button type="submit" class="btn btn-primary">Save Changes</button>
+        </div>
+    </form>
+
+</div>
