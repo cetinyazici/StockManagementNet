@@ -1,0 +1,41 @@
+﻿@model List<AppUser>
+@{
+    ViewData["Title"] = "UserList";
+    Layout = "~/Views/Shared/_UILayout.cshtml";
+}
+<div class="pagetitle">
+    <h1>AppUser</h1>
+    <nav>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
+            <li class="breadcrumb-item active">AppUser</li>
+        </ol>
+    </nav>
+</div>
+<h1 class="text-center">
+    <i class="bi bi-person"></i>
+    AppUser Page
+</h1>
+
+<div class="row mt-5">
+    <div class="col">
+        <div class="table-responsive">
+            <table id="myTable" class="table table-striped table-bordered">
+                <tr>
+                    <th>User Name</th>
+                    <th>Role<s/th>
+                </tr>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.UserName</td>
+                        <td><a href="/Role/AssignRole/@item.Id" class="btn btn-warning">Assign Role</a></td>
+                    </tr>
+                }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+

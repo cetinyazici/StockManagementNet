@@ -1,0 +1,36 @@
+﻿@model UpdateRoleViewModel
+@{
+    ViewData["Title"] = "UpdateRole";
+    Layout = "~/Views/Shared/_UILayout.cshtml";
+}
+
+<div class="pagetitle">
+    <h1>AppRole</h1>
+    <nav>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
+            <li class="breadcrumb-item active">Update AppRole</li>
+        </ol>
+    </nav>
+</div>
+<h1 class="text-center">
+    <i class="bi bi-shield-lock"></i>
+    Update AppRole
+</h1>
+
+<form id="roleForm2" asp-action="UpdateRole" method="post">
+    @Html.HiddenFor(model => model.RoleID) <!-- ID'yi gizli olarak gönderir -->
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.RoleName, "Role Name")
+        @Html.TextBoxFor(model => model.RoleName, new { @class = "form-control", placeholder = "Enter Role name" })
+        @Html.ValidationMessageFor(model => model.RoleName, "", new { @class = "text-danger" })
+    </div>
+    <br />
+    <button type="submit" class="btn btn-outline-primary">
+        <i class="bi bi-check-circle"></i> Update
+    </button>
+</form>
+
+
+
