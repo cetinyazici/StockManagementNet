@@ -103,6 +103,7 @@ namespace StockManagement.Web.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> AssignRole(List<RoleAssignViewModel> model)
         {
             var userid = (int)TempData["userid"];
